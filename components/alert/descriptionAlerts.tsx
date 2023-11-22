@@ -17,9 +17,9 @@ import {
 import MailIcon from "@mui/icons-material/Mail";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import CheckIcon from "@mui/icons-material/Check";
-
 import { useNotificationCenter } from "react-toastify/addons/use-notification-center";
 import { toast, TypeOptions } from "react-toastify";
+import styles from "./DescriptionAlerts.module.css";
 
 const types = ["success", "info", "warning", "error"];
 
@@ -47,15 +47,29 @@ export default function DescriptionAlerts() {
   };
 
   return (
-    <Box sx={{ margin: "8px" }}>
-      <Button size="large" onClick={toggleNotificationCenter}>
-        <Badge badgeContent={unreadCount} color="primary">
-          NOTIFICATIONS
-        </Badge>
-      </Button>
-      <Button onClick={addNotification}>Add notification</Button>
-
-      <Popper open={isOpen} anchorEl={anchorEl} transition>
+    <div>
+      <div className={styles.buttons}>
+        <button
+          className={styles.notificationsCenterButton}
+          onClick={toggleNotificationCenter}
+        >
+          Notifications
+          <Badge
+            className={styles.badge}
+            badgeContent={unreadCount}
+            color="primary"
+          />
+        </button>
+        <button className={styles.addButton} onClick={addNotification}>
+          Add notification
+        </button>
+      </div>
+      <Popper
+        className={styles.popper}
+        open={isOpen}
+        anchorEl={anchorEl}
+        transition
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Box>
@@ -75,7 +89,7 @@ export default function DescriptionAlerts() {
                   <FormControlLabel
                     control={
                       <Switch
-                        color="secondary"
+                        color="primary"
                         onChange={toggleFilter}
                         checked={showUnreadOnly}
                       />
@@ -153,6 +167,6 @@ export default function DescriptionAlerts() {
           </Fade>
         )}
       </Popper>
-    </Box>
+    </div>
   );
 }

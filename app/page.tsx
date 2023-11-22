@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import { ToastContainer } from "react-toastify";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "react-toastify/ReactToastify.min.css";
+import DescriptionAlerts from "@/components/alert/descriptionAlerts";
 
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
@@ -22,6 +23,7 @@ export default function Home() {
         </button>
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
+      <DescriptionAlerts />
       <ToastContainer position="bottom-right" newestOnTop />
     </StyledEngineProvider>
   );
