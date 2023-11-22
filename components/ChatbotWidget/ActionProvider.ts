@@ -6,6 +6,7 @@ interface IChatBotMessage {
 
 interface IState {
   // Structure of your chatbot state (e.g., messages, current step, etc.)
+  messages: IChatBotMessage[];
 }
 
 class ActionProvider {
@@ -38,7 +39,24 @@ class ActionProvider {
     this.createCustomMessage = createCustomMessage;
   }
 
-  // Define methods for actions here...
+  // Helper function to update the state of the chatbot
+  private updateChatbotState(message: IChatBotMessage) {
+    this.setState((prevState) => ({
+      ...prevState,
+      messages: [...prevState.messages, message],
+    }));
+  }
+
+  sendLinkButtonMessage() {
+    const message = this.createChatBotMessage(
+      "Click the button to go to the page:",
+      {
+        widget: "linkButton",
+      }
+    );
+
+    this.updateChatbotState(message);
+  }
 }
 
 export default ActionProvider;

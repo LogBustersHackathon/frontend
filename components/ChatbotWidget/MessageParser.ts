@@ -17,8 +17,10 @@ class MessageParser {
   }
 
   parse(message: string) {
-    console.log(message);
-    // Add your parsing logic here
+    if (message.toLowerCase().includes("show details")) {
+      this.actionProvider.sendLinkButtonMessage();
+    }
+    // ... other parsing logic
   }
 }
 
