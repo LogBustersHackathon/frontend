@@ -1,0 +1,18 @@
+.chatbotWidgetContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* To ensure it's above other content */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  color: black;
+  z-index: 1000; /* To ensure it's above other content */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
