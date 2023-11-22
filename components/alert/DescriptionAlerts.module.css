@@ -20,7 +20,7 @@
   .addButton {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 220px;
     background-color: #4caf50;
     border: none;
     color: white;
@@ -43,3 +43,4 @@
   .popper {
     margin-left: 20px !important;
   }
+
