@@ -6,7 +6,8 @@
   padding: 6rem;
   min-height: 100vh;
   background-image: url("bg.png");
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .button {
