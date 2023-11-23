@@ -22,7 +22,7 @@ import styles from "./DescriptionAlerts.module.css";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 const types = ["success", "info", "warning", "error"];
 
-export default function DescriptionAlerts() {
+export default function DescriptionAlerts(setId: any, setIsChatbotOpen: any) {
   const { notifications, clear, markAllAsRead, markAsRead, unreadCount } =
     useNotificationCenter();
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
@@ -132,7 +132,10 @@ export default function DescriptionAlerts() {
                             <Button
                               className={styles.showDetailButton}
                               size="small"
-                              onClick={() => console.log(notification.id)}
+                              onClick={() => {
+                                setId(notification.id);
+                                setIsChatbotOpen(true);
+                              }}
                             >
                               Show Detail
                             </Button>

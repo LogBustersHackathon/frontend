@@ -14,18 +14,22 @@ import { createToastMessage } from "@/components/alert/utils";
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
+  const [id, setId] = useState<number>(0);
+  console.log(id);
 
   console.log("alerts", alerts);
 
   const toggleChatbot = () => {
     setIsChatbotOpen((isChatbotOpen) => !isChatbotOpen);
   };
+
   useEffect(() => {
     let unsubscribe: () => void;
 
     const initSubscription = async () => {
       try {
         unsubscribe = await subscribeToSubject("alarms", (message: string) => {
+          createToastMessage(JSON.parse(message));
           setAlerts((currentAlerts) => [...currentAlerts, message]);
         });
       } catch (error) {
@@ -62,7 +66,7 @@ export default function Home() {
         </button>
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
-      <DescriptionAlerts />
+      <DescriptionAlerts setId={setId} setIsChatbotOpen={setIsChatbotOpen} />
       <ToastContainer position="bottom-right" theme="dark" newestOnTop />
     </StyledEngineProvider>
   );

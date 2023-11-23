@@ -1,9 +1,13 @@
 import { toast, TypeOptions } from "react-toastify";
 
 export const createToastMessage = (
-    Arr: { type: TypeOptions; message: string }[]
+     text?: any
   ) => {
-    Arr.forEach((v) => {
-      toast(v.message, { type: v.type });
-    });
+    // if(Arr)
+    // Arr.forEach((v: any) => {
+    //   toast(v.message, { type: v.type });
+    // });
+    if(text)
+    toast(`Value: ${text.Value}, Owner: ${text.Owner} Status: ${text.Status} Alarm Type: ${text.AlarmType}`, { type: "error"}),
+     console.log('text ' ,text);
   };
