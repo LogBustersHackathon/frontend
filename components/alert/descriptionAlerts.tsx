@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import {
   Alert,
@@ -14,16 +15,19 @@ import {
   Switch,
   Stack,
 } from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNotificationCenter } from "react-toastify/addons/use-notification-center";
 import { toast, TypeOptions } from "react-toastify";
 import styles from "./DescriptionAlerts.module.css";
-
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 const types = ["success", "info", "warning", "error"];
 
-export default function DescriptionAlerts() {
+export const DescriptionAlerts = ({
+  setId,
+  setIsChatbotOpen,
+  setShowDetails,
+}: any) => {
   const { notifications, clear, markAllAsRead, markAsRead, unreadCount } =
     useNotificationCenter();
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
@@ -49,20 +53,18 @@ export default function DescriptionAlerts() {
   return (
     <div>
       <div className={styles.buttons}>
-        <button
-          className={styles.notificationsCenterButton}
+        <IconButton
+          size="large"
           onClick={toggleNotificationCenter}
+          className={styles.notificationsCenterButton}
         >
-          Notifications
+          <NotificationsOutlinedIcon />
           <Badge
-            className={styles.badge}
             badgeContent={unreadCount}
             color="primary"
-          />
-        </button>
-        <button className={styles.addButton} onClick={addNotification}>
-          Add notification
-        </button>
+            className={styles.badge}
+          ></Badge>
+        </IconButton>
       </div>
       <Popper
         className={styles.popper}
@@ -128,16 +130,42 @@ export default function DescriptionAlerts() {
                       severity={(notification.type as AlertColor) || "info"}
                       action={
                         notification.read ? (
-                          <CheckIcon />
+                          <div>
+                            <Button
+                              className={styles.showDetailButton}
+                              size="small"
+                              onClick={() => {
+                                setId(notification.id);
+                                setIsChatbotOpen(true);
+                                setShowDetails(true);
+                              }}
+                            >
+                              Show Detail
+                            </Button>
+                            <CheckIcon />
+                          </div>
                         ) : (
-                          <IconButton
-                            color="primary"
-                            aria-label="upload picture"
-                            component="span"
-                            onClick={() => markAsRead(notification.id)}
-                          >
-                            <MarkChatReadIcon />
-                          </IconButton>
+                          <div>
+                            <Button
+                              className={styles.showDetailButton}
+                              size="small"
+                              onClick={() => {
+                                console.log(notification.id);
+                                setIsChatbotOpen(true);
+                                setShowDetails(true);
+                              }}
+                            >
+                              Show Detail
+                            </Button>
+                            <IconButton
+                              color="primary"
+                              aria-label="upload picture"
+                              component="span"
+                              onClick={() => markAsRead(notification.id)}
+                            >
+                              <MarkChatReadIcon />
+                            </IconButton>
+                          </div>
                         )
                       }
                     >
@@ -169,4 +197,4 @@ export default function DescriptionAlerts() {
       </Popper>
     </div>
   );
-}
+};

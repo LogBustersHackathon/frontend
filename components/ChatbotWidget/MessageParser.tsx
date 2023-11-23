@@ -1,6 +1,7 @@
 // MessageParser starter code
 
 import ActionProvider from "./ActionProvider"; // Import the ActionProvider class
+import { useChatbotContext } from "../../context/ChatbotContext";
 
 // Define the type for the state if it has a specific structure
 interface IState {
@@ -17,9 +18,18 @@ class MessageParser {
   }
 
   parse(message: string) {
+    const { chatbotState } = useChatbotContext() as any;
+
     if (message.toLowerCase().includes("show details")) {
       this.actionProvider.sendLinkButtonMessage();
     }
+
+    if (chatbotState.action === "analyze") {
+      this.actionProvider.sendAnalyzeMessage(chatbotState.data);
+      // Reset the global state after handling
+      // ...
+    }
+
     // ... other parsing logic
   }
 }

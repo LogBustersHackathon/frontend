@@ -9,24 +9,51 @@ import { subscribeToSubject } from "../wsConnection/natsConnection";
 import { ToastContainer } from "react-toastify";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "react-toastify/ReactToastify.min.css";
-import DescriptionAlerts from "@/components/alert/descriptionAlerts";
+import { DescriptionAlerts } from "@/components/alert/descriptionAlerts";
 import { createToastMessage } from "@/components/alert/utils";
+import { useChatbotContext } from "@/context/ChatbotContext";
+
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
+  const [id, setId] = useState<number>(0);
 
-  console.log("alerts", alerts);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  const { setChatbotState } = useChatbotContext() as any;
 
   const toggleChatbot = () => {
     setIsChatbotOpen((isChatbotOpen) => !isChatbotOpen);
   };
+
   useEffect(() => {
     let unsubscribe: () => void;
 
     const initSubscription = async () => {
       try {
-        unsubscribe = await subscribeToSubject("alarms", (message: string) => {
-          setAlerts((currentAlerts) => [...currentAlerts, message]);
+        unsubscribe = await subscribeToSubject("alarms", (message: any) => {
+          const msg = JSON.parse(message);
+
+          let statusDescription: string;
+          switch (msg.AlarmType) {
+            case 0:
+              statusDescription =
+                "The system is healthy and functioning as expected.";
+              break;
+            case 1:
+              statusDescription =
+                "Critical alert! Immediate attention required. There could be a significant risk to the system.";
+              break;
+
+            case 2:
+              statusDescription =
+                "Warning: The system is in a state that requires attention, but it is not critical yet.";
+              break;
+            default:
+              break;
+          }
+
+          setAlerts((currentAlerts) => [...currentAlerts, statusDescription]);
         });
       } catch (error) {
         console.error("Subscription error:", error);
@@ -42,27 +69,37 @@ export default function Home() {
     };
   }, []);
 
+  //create toast message if new alert is received
+  useEffect(() => {
+    if (alerts.length > 0) {
+      createToastMessage(alerts[alerts.length - 1]);
+    }
+  }, [alerts]);
+
+  useEffect(() => {
+    if (showDetails) {
+      setChatbotState({
+        action: "analyze",
+        data: "Solution",
+      });
+    }
+  }, [showDetails]);
+
   return (
     <StyledEngineProvider injectFirst>
       <main className={styles.main}>
         <div className={styles.center}></div>
-        <button
-          className={styles.addButton}
-          onClick={() =>
-            createToastMessage([
-              { type: "success", message: "hello" },
-              { type: "error", message: "world" },
-            ])
-          }
-        >
-          Toast
-        </button>
+
         <button className={styles.button} onClick={toggleChatbot}>
           {isChatbotOpen ? "Close" : "Open"} Chatbot
         </button>
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
-      <DescriptionAlerts />
+      <DescriptionAlerts
+        setId={setId}
+        setIsChatbotOpen={setIsChatbotOpen}
+        setShowDetails={setShowDetails}
+      />
       <ToastContainer position="bottom-right" theme="dark" newestOnTop />
     </StyledEngineProvider>
   );

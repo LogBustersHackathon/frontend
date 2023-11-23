@@ -47,13 +47,22 @@ class ActionProvider {
     }));
   }
 
-  sendLinkButtonMessage() {
+  public sendLinkButtonMessage() {
     const message = this.createChatBotMessage(
       "Click the button to go to the page:",
       {
         widget: "linkButton",
       }
     );
+
+    this.updateChatbotState(message);
+  }
+
+  public sendAnalyzeMessage(data: any) {
+    const message = this.createChatBotMessage("Analysis details:", {
+      widget: "analyzeWidget",
+      data: data, // Pass the analysis data to the widget
+    });
 
     this.updateChatbotState(message);
   }

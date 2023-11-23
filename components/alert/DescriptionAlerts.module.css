@@ -1,46 +1,48 @@
-  .notificationsCenterButton {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    padding: 20px 40px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    border-radius: 10px;
-    z-index: 1000;
-    gap: 20px;
-  }
+.notificationsCenterButton {
+  position: fixed;
+  top: 6px;
+  left: 5px;
+  border: none;
+  color: white;
+  padding: 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 1000;
+  gap: 20px;
+}
 
-  .addButton {
-    position: fixed;
-    bottom: 20px;
-    left: 220px;
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    padding: 20px 40px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    border-radius: 10px;
-    z-index: 1000;
-    gap: 20px;
-  }
+.addButton {
+  position: fixed;
+  bottom: 20px;
+  left: 220px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 1000;
+  gap: 20px;
+}
 
-  .badge {
-    margin-left: 16px;
-  }
+.badge {
+  top: 0px !important;
+}
 
-  .popper {
-    margin-left: 20px !important;
-  }
+.popper {
+  margin-left: 20px !important;
+}
 
+.showDetailButton {
+  margin-right: 10px;
+  font-size: 12px;
+}
