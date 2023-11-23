@@ -65,9 +65,6 @@ export const DescriptionAlerts = ({
             className={styles.badge}
           ></Badge>
         </IconButton>
-        <button className={styles.addButton} onClick={addNotification}>
-          Add notification
-        </button>
       </div>
       <Popper
         className={styles.popper}
