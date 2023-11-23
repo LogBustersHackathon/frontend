@@ -4,34 +4,35 @@ import { useEffect, useState } from "react";
 import { ChatbotWidget } from "../components/ChatbotWidget/ChatbotWidget";
 import styles from "./page.module.css";
 
-import { subscribeToNatsAlerts } from "@/wsConnection/natsConnection";
+import { subscribeToSubject } from "@/wsConnection/natsConnection";
 
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  const [alerts, setAlerts] = useState<any[]>([]);
+  const [alerts, setAlerts] = useState<string[]>([]);
+
+  console.log("alerts", alerts);
 
   const toggleChatbot = () => {
     setIsChatbotOpen((isChatbotOpen) => !isChatbotOpen);
   };
-
   useEffect(() => {
-    let natsResources: any;
+    let unsubscribe: () => void;
 
-    const handleMessage = (message: any) => {
-      const alertMessage = new TextDecoder().decode(message.data);
-      setAlerts((currentAlerts) => [...currentAlerts, alertMessage]);
+    const initSubscription = async () => {
+      try {
+        unsubscribe = await subscribeToSubject("alarms", (message: string) => {
+          setAlerts((currentAlerts) => [...currentAlerts, message]);
+        });
+      } catch (error) {
+        console.error("Subscription error:", error);
+      }
     };
 
-    const initNatsSubscription = async () => {
-      natsResources = await subscribeToNatsAlerts(handleMessage);
-    };
-
-    initNatsSubscription();
+    initSubscription();
 
     return () => {
-      if (natsResources) {
-        natsResources.subscription.unsubscribe();
-        natsResources.nc.close();
+      if (unsubscribe) {
+        unsubscribe();
       }
     };
   }, []);
