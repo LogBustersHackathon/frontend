@@ -59,7 +59,9 @@ export default function Home() {
               break;
           }
 
-          setAlerts((currentAlerts) => [...currentAlerts, statusDescription]);
+          if (alerts.length < 5) {
+            setAlerts((currentAlerts) => [...currentAlerts, statusDescription]);
+          }
         });
       } catch (error) {
         console.error("Subscription error:", error);
@@ -77,7 +79,7 @@ export default function Home() {
 
   //create toast message if new alert is received
   useEffect(() => {
-    if (alerts.length > 0) {
+    if (alerts.length > 0 && alerts.length < 6) {
       createToastMessage(alerts[alerts.length - 1]);
     }
   }, [alerts]);
@@ -97,11 +99,14 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.center}></div>
 
-        <Icon
+        {/* <Icon
           className={styles.button}
           onClick={toggleChatbot}
           style={{ width: "100px", height: "100px" }}
-        />
+        /> */}
+
+        <div className={styles.icon} onClick={toggleChatbot}></div>
+
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
       <DescriptionAlerts

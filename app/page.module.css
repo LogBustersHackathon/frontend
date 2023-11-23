@@ -10,6 +10,23 @@
   background-repeat: no-repeat;
 }
 
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  width: 100px;
+  height: 100px;
+  background-image: url("lb.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
 .button {
   position: fixed;
   bottom: 20px;

@@ -131,32 +131,10 @@ export const DescriptionAlerts = ({
                       action={
                         notification.read ? (
                           <div>
-                            <Button
-                              className={styles.showDetailButton}
-                              size="small"
-                              onClick={() => {
-                                setId(notification.id);
-                                setIsChatbotOpen(true);
-                                setShowDetails(true);
-                              }}
-                            >
-                              Show Detail
-                            </Button>
                             <CheckIcon />
                           </div>
                         ) : (
                           <div>
-                            <Button
-                              className={styles.showDetailButton}
-                              size="small"
-                              onClick={() => {
-                                console.log(notification.id);
-                                setIsChatbotOpen(true);
-                                setShowDetails(true);
-                              }}
-                            >
-                              Show Detail
-                            </Button>
                             <IconButton
                               color="primary"
                               aria-label="upload picture"
