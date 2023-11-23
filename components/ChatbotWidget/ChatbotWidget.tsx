@@ -10,9 +10,7 @@ import style from "./ChatbotWidget.module.css";
 import { createChatBotMessage } from "react-chatbot-kit";
 
 const LinkButton = ({ linkUrl = "https://example.com" }: any) => {
-  return (
-    <button onClick={() => (window.location.href = linkUrl)}>Go to Page</button>
-  );
+  return <div></div>;
 };
 
 export const ChatbotWidget = ({

@@ -49,7 +49,7 @@ class ActionProvider {
 
   public sendLinkButtonMessage() {
     const message = this.createChatBotMessage(
-      "Click the button to go to the page:",
+      "This machine, identified by its IP address, is experiencing several critical issues. It is advisable to promptly inspect the following applications: xxx.",
       {
         widget: "linkButton",
       }

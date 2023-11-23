@@ -22,7 +22,11 @@ export default function Home() {
 
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
-  const { setChatbotState } = useChatbotContext() as any;
+  console.log("isChatbotOpen", isChatbotOpen);
+
+  const { chatbotState, setChatbotState } = useChatbotContext() as any;
+
+  console.log("chatbotState", chatbotState);
 
   const toggleChatbot = () => {
     setIsChatbotOpen((isChatbotOpen) => !isChatbotOpen);
@@ -79,13 +83,14 @@ export default function Home() {
   }, [alerts]);
 
   useEffect(() => {
-    if (showDetails) {
+    if (isChatbotOpen) {
+      console.log("I am here");
       setChatbotState({
         action: "analyze",
         data: "Solution",
       });
     }
-  }, [showDetails]);
+  }, [isChatbotOpen]);
 
   return (
     <StyledEngineProvider injectFirst>
