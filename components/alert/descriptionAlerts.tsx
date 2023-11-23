@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import {
   Alert,
@@ -22,7 +23,11 @@ import styles from "./DescriptionAlerts.module.css";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 const types = ["success", "info", "warning", "error"];
 
-export default function DescriptionAlerts(setId: any, setIsChatbotOpen: any) {
+export const DescriptionAlerts = ({
+  setId,
+  setIsChatbotOpen,
+  setShowDetails,
+}: any) => {
   const { notifications, clear, markAllAsRead, markAsRead, unreadCount } =
     useNotificationCenter();
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
@@ -135,6 +140,7 @@ export default function DescriptionAlerts(setId: any, setIsChatbotOpen: any) {
                               onClick={() => {
                                 setId(notification.id);
                                 setIsChatbotOpen(true);
+                                setShowDetails(true);
                               }}
                             >
                               Show Detail
@@ -146,7 +152,11 @@ export default function DescriptionAlerts(setId: any, setIsChatbotOpen: any) {
                             <Button
                               className={styles.showDetailButton}
                               size="small"
-                              onClick={() => console.log(notification.id)}
+                              onClick={() => {
+                                console.log(notification.id);
+                                setIsChatbotOpen(true);
+                                setShowDetails(true);
+                              }}
                             >
                               Show Detail
                             </Button>
@@ -190,4 +200,4 @@ export default function DescriptionAlerts(setId: any, setIsChatbotOpen: any) {
       </Popper>
     </div>
   );
-}
+};

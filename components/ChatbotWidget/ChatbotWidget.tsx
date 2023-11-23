@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Chatbot from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
@@ -21,7 +22,7 @@ export const ChatbotWidget = ({
 }) => {
   const config = {
     botName: "Log Buster",
-    initialMessages: [createChatBotMessage("Hello world", {})],
+    initialMessages: [createChatBotMessage("Hello there", {})],
     widgets: [
       {
         widgetName: "linkButton",
