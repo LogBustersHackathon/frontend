@@ -42,3 +42,7 @@
     margin-left: 20px !important;
   }
 
+.showDetailButton {
+  margin-right: 10px;
+  font-size: 12px;
+}

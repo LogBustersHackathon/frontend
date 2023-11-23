@@ -128,16 +128,34 @@ export default function DescriptionAlerts() {
                       severity={(notification.type as AlertColor) || "info"}
                       action={
                         notification.read ? (
-                          <CheckIcon />
+                          <div>
+                            <Button
+                              className={styles.showDetailButton}
+                              size="small"
+                              onClick={() => console.log(notification.id)}
+                            >
+                              Show Detail
+                            </Button>
+                            <CheckIcon />
+                          </div>
                         ) : (
-                          <IconButton
-                            color="primary"
-                            aria-label="upload picture"
-                            component="span"
-                            onClick={() => markAsRead(notification.id)}
-                          >
-                            <MarkChatReadIcon />
-                          </IconButton>
+                          <div>
+                            <Button
+                              className={styles.showDetailButton}
+                              size="small"
+                              onClick={() => console.log(notification.id)}
+                            >
+                              Show Detail
+                            </Button>
+                            <IconButton
+                              color="primary"
+                              aria-label="upload picture"
+                              component="span"
+                              onClick={() => markAsRead(notification.id)}
+                            >
+                              <MarkChatReadIcon />
+                            </IconButton>
+                          </div>
                         )
                       }
                     >
