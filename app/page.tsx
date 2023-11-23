@@ -13,6 +13,8 @@ import { DescriptionAlerts } from "@/components/alert/descriptionAlerts";
 import { createToastMessage } from "@/components/alert/utils";
 import { useChatbotContext } from "@/context/ChatbotContext";
 
+import Icon from "../public/Logbusters.svg";
+
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
@@ -90,9 +92,11 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.center}></div>
 
-        <button className={styles.button} onClick={toggleChatbot}>
-          {isChatbotOpen ? "Close" : "Open"} Chatbot
-        </button>
+        <Icon
+          className={styles.button}
+          onClick={toggleChatbot}
+          style={{ width: "100px", height: "100px" }}
+        />
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
       <DescriptionAlerts
