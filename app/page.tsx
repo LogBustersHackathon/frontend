@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ChatbotWidget } from "../components/ChatbotWidget/ChatbotWidget";
 import styles from "./page.module.css";
+import Icon from "./avatar/SVG/avatar.svg";
 
 import { subscribeToSubject } from "../wsConnection/natsConnection";
 
@@ -11,6 +12,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import "react-toastify/ReactToastify.min.css";
 import DescriptionAlerts from "@/components/alert/descriptionAlerts";
 import { createToastMessage } from "@/components/alert/utils";
+import { IconButton } from "@mui/material";
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
@@ -57,9 +59,9 @@ export default function Home() {
         >
           Toast
         </button>
-        <button className={styles.button} onClick={toggleChatbot}>
-          {isChatbotOpen ? "Close" : "Open"} Chatbot
-        </button>
+        <IconButton className={styles.button} onClick={toggleChatbot}>
+          <img src={Icon} />
+        </IconButton>
         {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
       </main>
       <DescriptionAlerts />
