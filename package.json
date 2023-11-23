@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "nats.ws": "^1.19.1",
     "next": "14.0.3",
     "react": "^18",
     "react-chatbot-kit": "^2.1.2",
