@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import { ChatbotWidget } from "../components/ChatbotWidget/ChatbotWidget";
 import styles from "./page.module.css";
 
-import { subscribeToSubject } from "@/wsConnection/natsConnection";
+import { subscribeToSubject } from "../wsConnection/natsConnection";
 
+import { ToastContainer } from "react-toastify";
+import { StyledEngineProvider } from "@mui/material/styles";
+import "react-toastify/ReactToastify.min.css";
+import DescriptionAlerts from "@/components/alert/descriptionAlerts";
+import { createToastMessage } from "@/components/alert/utils";
 export default function Home() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
@@ -38,13 +43,27 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.center}></div>
-
-      <button className={styles.button} onClick={toggleChatbot}>
-        {isChatbotOpen ? "Close" : "Open"} Chatbot
-      </button>
-      {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
-    </main>
+    <StyledEngineProvider injectFirst>
+      <main className={styles.main}>
+        <div className={styles.center}></div>
+        <button
+          className={styles.addButton}
+          onClick={() =>
+            createToastMessage([
+              { type: "success", message: "hello" },
+              { type: "error", message: "world" },
+            ])
+          }
+        >
+          Toast
+        </button>
+        <button className={styles.button} onClick={toggleChatbot}>
+          {isChatbotOpen ? "Close" : "Open"} Chatbot
+        </button>
+        {isChatbotOpen && <ChatbotWidget toggleChatbot={toggleChatbot} />}
+      </main>
+      <DescriptionAlerts />
+      <ToastContainer position="bottom-right" theme="dark" newestOnTop />
+    </StyledEngineProvider>
   );
 }
