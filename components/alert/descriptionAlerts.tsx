@@ -14,13 +14,12 @@ import {
   Switch,
   Stack,
 } from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNotificationCenter } from "react-toastify/addons/use-notification-center";
 import { toast, TypeOptions } from "react-toastify";
 import styles from "./DescriptionAlerts.module.css";
-
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 const types = ["success", "info", "warning", "error"];
 
 export default function DescriptionAlerts() {
@@ -49,17 +48,18 @@ export default function DescriptionAlerts() {
   return (
     <div>
       <div className={styles.buttons}>
-        <button
-          className={styles.notificationsCenterButton}
+        <IconButton
+          size="large"
           onClick={toggleNotificationCenter}
+          className={styles.notificationsCenterButton}
         >
-          Notifications
+          <NotificationsOutlinedIcon />
           <Badge
-            className={styles.badge}
             badgeContent={unreadCount}
             color="primary"
-          />
-        </button>
+            className={styles.badge}
+          ></Badge>
+        </IconButton>
         <button className={styles.addButton} onClick={addNotification}>
           Add notification
         </button>

@@ -1,16 +1,14 @@
   .notificationsCenterButton {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #4caf50;
+    top: 0px;
+    left: 160px;
     border: none;
     color: white;
-    padding: 20px 40px;
+    padding: 4px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-top: 20px;
     cursor: pointer;
     border-radius: 10px;
     z-index: 1000;
@@ -37,7 +35,7 @@
   }
 
   .badge {
-    margin-left: 16px;
+    top: 0px !important;
   }
 
   .popper {
